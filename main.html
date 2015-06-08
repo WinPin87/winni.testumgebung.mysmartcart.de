@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="mysmartcart">
+	<head>
+		<title>mySmartCart</title>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/navigation.js"></script>
+		<link rel="stylesheet" type="text/css" href="style/main.css">
+		<?php include 'php/sessionCheck.php'; ?>
+	</head>
+	<body ng-controller="main">
+		<div class="container" ng-show="overview">
+			<div class="header">
+				<div id="greeting">
+					<span>Willkommen in ihrem Edeka Markt!</span>
+				</div>
+				<div class="logout">
+					<form method="post" action="php/logout.php">
+						<input id="logoutButton" type="submit" name="logout" value="Abmelden">
+					</form>
+				</div>
+				
+			</div>
+			<div class="content">
+				<div id="leftBlock">
+					<p id="leftText">Ihre Einkaufslisten:</p>
+					<div id="overviewContentLeft" class="mainElementChild">
+						<div id="shoppinglistList" ng-repeat="list in lists">
+							<button ng-click="showNavigation(list.id);">
+							{{list.name}}
+							</button>
+						</div>
+					</div>
+					<input type="button" id="test" value="Ohne Einkaufsliste einkaufen">
+				</div>
+				<div id="rightBlock">
+					<p id="rightText">Aktuelle Sonderangebote:</p>
+					<div id="overviewContentRight" class="mainElementChild">
+						<img src="img/sonderangebote.jpg"/>
+					</div>
+				</div>				
+			</div>
+
+		</div>
+		<div class="container" ng-show="!overview">
+			<div class="header navigation">
+				<button ng-click="hideNavigation();">Zurück</button>
+				<input id="productsearch" type="text" data-provide="typeahead" name="Search" placeholder="Suche">				
+				<div class="logout">
+					<form method="post" action="php/logout.php">
+						<input id="logoutButton" type="submit" name="logout" value="Ausloggen">
+					</form>
+				</div>
+			</div>
+
+			<div class="content navigation">
+				<div id="navigationContentLeft">
+					<div id="shoppinglistList" ng-repeat="product in products">
+				    	<button ng-click="">
+				          {{product.name}}
+				        </button>
+					</div>
+				</div>
+				<div id="navigationContentRight">
+					<div id="market">
+						
+					</div>
+				</div>
+			</div>
+
+			<div class="footer navigation">
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/main.js"></script>
+</html>
